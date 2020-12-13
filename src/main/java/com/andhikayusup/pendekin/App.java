@@ -3,12 +3,61 @@
  */
 package com.andhikayusup.pendekin;
 
-public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
+import java.util.Scanner;
 
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Shortener shortener = new Shortener();
+        Boolean isContinue = true;
+
+        do  {
+            Scanner input = new Scanner(System.in);
+            String[] arrOfInput = input.nextLine().split("\\?", 2);
+            switch(arrOfInput[0]){
+                case "/shorten":
+                    String[] arrOfParams = arrOfInput[1].split("\\&", 2);
+                    String link = "";
+                    String short_path = "";
+
+                    for (String param : arrOfParams) {
+                        String[] arrOfVal = param.split("=", 2);
+                        if(arrOfVal[0].equals("url")){
+                            link = arrOfVal[1];
+                        } else if (arrOfVal[0].equals("short_path") || arrOfVal[0].equals("desired")){
+                            short_path = arrOfVal[1];
+                        }
+                    }
+
+                    System.out.println(shortener.shorten(link, short_path)); 
+                    break;
+
+                case "/redirect":
+                    String[] arrOfVal = arrOfInput[1].split("=", 2);
+
+                    System.out.println(shortener.redirect(arrOfVal[1]));
+                    break;
+
+                case "/delete":
+                    String[] arrOfVal2 = arrOfInput[1].split("=", 2);
+
+                    if (shortener.delete(arrOfVal2[1])){
+                        System.out.println("Success");
+                    } else {
+                        System.out.println("Error " + arrOfVal2[1].toString() + " not found.");
+                    }
+                    break;
+
+                case "/count":
+                    String[] arrOfVal3 = arrOfInput[1].split("=", 2);
+
+                    System.out.println(shortener.count(arrOfVal3[1]));
+                    break;
+                
+                case "/logout":
+                    isContinue = false;
+                    input.close();
+                    break;
+            }
+        } while (isContinue);
     }
 }
