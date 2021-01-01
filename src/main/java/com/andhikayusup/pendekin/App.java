@@ -11,6 +11,12 @@ public class App {
         Shortener shortener = new Shortener();
         Boolean isContinue = true;
 
+        System.out.println("=============================================");
+        System.out.println("=         Pendekin.id is live!              =");
+        System.out.println("=============================================");
+        System.out.println("Please use command \"/help\" to get list all \navailable commands.\n");
+
+
         do  {
             Scanner input = new Scanner(System.in);
             String[] arrOfInput = input.nextLine().split("\\?", 2);
@@ -58,6 +64,17 @@ public class App {
                     isContinue = false;
                     input.close();
                     break;
+
+                case "/help":
+                    System.out.println("\nAvailable Commands:\n");
+                    System.out.println("/shorten?url=<target url>&short_path=<desired path>  ->   Shorten URL operation");
+                    System.out.println("/redirect?url=<shorten url>  ->   Redirect short link operation");
+                    System.out.println("/delete?url=<shorten url> ->   Delete short link operation");
+                    System.out.println("/count?url=<shorten url>  ->   Count view of short link operation\n");
+                    break;
+                default:
+                    System.out.println("Unknown Commands; Please see \"/help\"");
+                    
             }
         } while (isContinue);
     }
