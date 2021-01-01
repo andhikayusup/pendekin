@@ -21,7 +21,7 @@ public class Shortener {
 
     public String redirect(String url){
         if(!mapOfLinks.containsKey(url)){
-            return "Error:" + url.split(base, 1).toString() + " not found";
+            return "Error: " + removeBaseUrl(url) + " not found";
         }
 
         Shorts shorts = mapOfLinks.get(url);
@@ -40,7 +40,7 @@ public class Shortener {
 
     public String count(String url){
         if(!mapOfLinks.containsKey(url)){
-            return "Error:" + url.split(base, 1).toString() + " not found";
+            return "Error: " + removeBaseUrl(url) + " not found";
         }
         
         Shorts shorts = mapOfLinks.get(url);
@@ -72,5 +72,10 @@ public class Shortener {
         } 
   
         return sb.toString(); 
-    } 
+    }
+
+    public String removeBaseUrl(String url){
+        String temp = url.replace(base, "");
+        return temp;
+    }
 }

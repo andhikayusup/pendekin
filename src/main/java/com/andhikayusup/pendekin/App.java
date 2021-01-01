@@ -4,6 +4,7 @@
 package com.andhikayusup.pendekin;
 
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class App {
     public static void main(String[] args) {
@@ -43,7 +44,7 @@ public class App {
                     if (shortener.delete(arrOfVal2[1])){
                         System.out.println("Success");
                     } else {
-                        System.out.println("Error " + arrOfVal2[1].toString() + " not found.");
+                        System.out.printf("Error: %s not found.\n", shortener.removeBaseUrl(arrOfVal2[1].toString()));
                     }
                     break;
 
